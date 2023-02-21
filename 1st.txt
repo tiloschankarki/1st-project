@@ -1,9 +1,4 @@
-// File Name: main.cpp
-// Author: Tiloschan Karki(jov20)
-// Collaborators: Shishir Khanal, Ananta Aryal
-// Date: 01/27/2023
-// Assignment Number: 1
-// CS 2308 Spring 2022
+
 // The program tracks the medals won by countries participating at the Olympic** 
 //games.
 
