@@ -1,0 +1,181 @@
+// File Name: main.cpp
+// Author: Tiloschan Karki(jov20)
+// Collaborators: Shishir Khanal, Ananta Aryal
+// Date: 01/27/2023
+// Assignment Number: 1
+// CS 2308 Spring 2022
+// The program tracks the medals won by countries participating at the Olympic** 
+//games.
+
+#include <iostream>
+#include <iomanip>
+#include <string>
+
+using namespace std;
+
+const int Size = 8;
+//The struct Country is created here.
+    struct Country{
+        string name; //Country name
+        int gold; //Number of gold medals awarded
+        int silver; //Number of silver medals awarded
+        int bronze; //Number of bronze medals awarded
+    };
+
+//***********************************************************
+//showResults: It sets up the initial table for the output.
+//
+//countries introduces the array called countries from the Country struct
+//Does not return any type.
+//***********************************************************
+
+    void showResults (Country*countries){
+    cout << left << setw(3) << "N" << setw(15) << "Country"
+    << right << setw(10) << "Gold" << setw (10) << "Silver"
+    << setw (10) << "Bronze" << setw(10) << "Total" << endl;
+    
+        for(int i = 0; i < Size; i++){
+        //This initiates the value for the table
+            cout << left << setw(3) << i + 1 << setw(15) 
+            << countries[i].name << right << setw(10)
+            << countries[i].gold << setw (10) << countries[i].silver
+            << setw (10) << countries[i].bronze << setw(10)
+            << (countries[i].gold + countries[i].silver + 
+            countries[i].bronze) << endl;
+        }
+    }
+
+//***********************************************************
+//addMedal: Adds medal by one in the medals instructed by user.
+//
+//countries introduces the array called countries from the Country struct
+//countryNum is the index of the country.
+//medalType is the character for user to input to indicate which medal
+//they selected.
+//Does not return any type
+//***********************************************************    
+
+    void addMedal (Country*countries,int countryNum,char medalType){
+    if(medalType == 'g' || medalType == 'G'){
+    //increases value of gold medal by 1;
+        countries[countryNum-1].gold += 1;
+     }
+     
+     else if(medalType == 's' || medalType == 'S'){
+    //increases value of silver medal by 1;
+        countries[countryNum-1].silver += 1;
+     }
+     
+     else if(medalType == 'b' || medalType == 'B'){
+    //increases value of bronze medal by 1;
+        countries[countryNum-1].bronze += 1;
+     }
+    
+    }
+
+//***********************************************************
+//totalMedals: Calculates the total number of medals of all countries
+//
+//countries introduces the array called countries from the Country struct
+//
+//Returns the total medal for all countries.
+//***********************************************************
+
+    int totalMedals(Country*countries) {
+	int total = 0;	// variable to store the total medal count for all countries
+	
+	    for (int i = 0; i < Size; i++) {//for loop to sum up throughout the array
+	     total += countries[i].gold + countries[i].silver + countries[i].bronze;	
+	    }
+	    
+	return total;	// return the total medals for all countries
+    }
+
+//***********************************************************
+//mostGoldMedals: returns the country with most gold medals.
+//
+//1st Parameter introduces the array called countries from the Country struct
+//
+//returns the index of the country with maximum gold medals
+//***********************************************************
+
+    int mostGoldMedals(Country*countries){
+        int maxGold = countries[0].gold;//initiating with 1st country's gold
+        int maxIndex = 0; //variable to store maximum index
+        for(int i = 0; i < Size; i++){
+            if (countries[i].gold > maxGold){
+                maxGold = countries[i].gold;//update the max gold count
+                maxIndex = i;//update the max index
+            }
+        }
+        return maxIndex;
+    }
+
+int main() {
+  
+    int countryNum;	//user input for the country number
+	char medalType;	//user input for the medal type (Gold, Silver or Bronze)
+    Country countries[8];
+    
+	countries[0].name = "Australia";	// name of the country
+	countries[0].gold = 11;	    // number of gold medals for the country
+	countries[0].silver = 14;	// number of silver medals for the country
+	countries[0].bronze = 12;	// number of bronze medals for the country
+	// COUNTRY 2
+	countries[1].name = "Canada";	// name of the country
+	countries[1].gold = 5;	    // number of gold medals for the country
+	countries[1].silver = 0;	// number of silver medals for the country
+	countries[1].bronze = 1;	// number of bronze medals for the country
+	// COUNTRY 3
+	countries[2].name = "China";	// name of the country
+	countries[2].gold = 9;	    // number of gold medals for the country
+    countries[2].silver = 14;	// number of silver medals for the country
+	countries[2].bronze = 11;	// number of bronze medals for the country
+	// COUNTRY 4
+	countries[3].name = "Great Britain";	// name of the country
+	countries[3].gold = 8;	    // number of gold medals for the country
+	countries[3].silver = 4;	// number of silver medals for the country
+	countries[3].bronze = 8;	// number of bronze medals for the country
+	// COUNTRY 5
+	countries[4].name = "Japan";	// name of the country
+	countries[4].gold = 8;	    // number of gold medals for the country
+	countries[4].silver = 10;	// number of silver medals for the country
+	countries[4].bronze = 10;	// number of bronze medals for the country
+	// COUNTRY 6
+	countries[5].name = "Netherlands";	// name of the country
+    countries[5].gold = 7;	    // number of gold medals for the country
+	countries[5].silver = 6;	// number of silver medals for the country
+	countries[5].bronze = 7;	// number of bronze medals for the country
+	// COUNTRY 7
+	countries[6].name = "Russia";	// name of the country
+	countries[6].gold = 6;  	// number of gold medals for the country
+	countries[6].silver = 10;	// number of silver medals for the country
+	countries[6].bronze = 8;	// number of bronze medals for the country
+	// COUNTRY 8
+	countries[7].name = "USA";	// name of the country
+	countries[7].gold = 10;	    // number of gold medals for the country
+    countries[7].silver = 6;	// number of silver medals for the country
+	countries[7].bronze = 7;	// number of bronze medals for the country
+
+	do {
+	    showResults(countries); //function call to display initial table
+	    cout << "Enter the country number (0 to quit):" << endl;
+	    cin >> countryNum;
+	    
+	    if (countryNum ==0){//if country num is 0, call other functions.
+	    cout << "Total medals Awarded: " << totalMedals(countries) 
+	    << endl;
+	    cout << "Country with the most Gold Medals: " << 
+	    countries[mostGoldMedals(countries)].name << endl;
+	    return -1;
+	    }
+	    
+		cout << "Enter the medal type (G,S, or B):" << endl;
+		cin >> medalType;	
+		
+		addMedal(countries, countryNum, medalType);	
+	} while (countryNum != 0);
+	// the loop continues until user enters 0 for the country number
+
+	return 0;	// exit program successfully
+}
